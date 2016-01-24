@@ -1,0 +1,51 @@
+#define Button 7
+#define Buzzer 4
+#define ledPin 2
+
+int countscore = 0;
+
+
+void setup() {
+// put your setup code here, to run once:
+pinMode(Buzzer, OUTPUT);
+pinMode(Button, INPUT);
+pinMode(ledPin, OUTPUT);
+Serial.begin(9600);
+Serial.println("Program initiated. Ready!"); // print ready once
+}
+
+void loop() {
+// put your main code here, to run repeatedly:
+
+// pause arduino, wait for action to start
+while (digitalRead(Button)==0)
+{
+  delay(5);
+}
+
+  int randButt = rand() % 20;
+  int randBuzz = rand() % 10;
+  int count1 = 0;
+  
+  int state = digitalRead(Button);
+  if (state == 1){
+  count1++;
+  countscore++; 
+  }
+  
+  if(count1 != randButt){
+  Serial.println("Alert");
+  Serial.println(countscore);
+  digitalWrite(Buzzer, HIGH);
+  digitalWrite(ledPin, HIGH);
+  delay(100);
+  digitalWrite(ledPin, LOW);
+  delay(100);
+  } else if(count1 = randButt){
+  Serial.println("No Alert");
+  digitalWrite(Buzzer, LOW);
+  delay(5000);
+  count1 = 0;
+  } else if(state == 0)
+  digitalWrite(Buzzer, HIGH);
+  }
